@@ -1,15 +1,23 @@
 - type: custom-api
   title: Karakeep Latest Bookmarks
-  url: https://${KARAKEEP_URL}/api/v1/bookmarks?limit=10
   method: GET
   options:
+    limit: 30
     in-new-tab: true
   headers:
     Authorization: Bearer ${KARAKEEP_API_KEY}
     Accept: application/json
   template: |
+    {{ $limit := .Options.IntOr "limit" 10 }}
     {{ $newTab := .Options.BoolOr "in-new-tab" false }}
-    {{ $bookmarks := .JSON.Array "bookmarks" }}
+    {{ $url := printf "https://%s/api/v1/bookmarks?limit=%d" "${KARAKEEP_URL}" $limit }}
+
+    {{ $resp := newRequest $url
+      | withHeader "Authorization" (printf "Bearer %s" "${KARAKEEP_API_KEY}")
+      | withHeader "Accept" "application/json"
+      | getResponse }}
+
+    {{ $bookmarks := $resp.JSON.Array "bookmarks" }}
 
     <ul class="list list-gap-10 collapsible-container" data-collapse-after="6" style="max-width: 100%; overflow-x: hidden; font-size: 1em; line-height: 1.3em; padding-left: 0; margin: 0;">
       {{ range $b := $bookmarks }}
