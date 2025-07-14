@@ -3,9 +3,12 @@
 
 This repository contains two custom API widgets for Karakeep: 
 
+# Karakeep Dashboard
+1 - This project includes a Karakeep Dashboard for an enhanced overview and management experience.
      
+<img width="351" height="430" alt="immagine" src="https://github.com/user-attachments/assets/8c65c320-c560-49d9-929b-d71dcf7d6f74" />
 
-   1 - Statistics Widget
+   2 - Statistics Widget
     Returns statistics on the number of bookmarks and the number of tags. 
     
 <img width="313" height="116" alt="immagine" src="https://github.com/user-attachments/assets/34f274e9-d41b-4ff4-9af2-5b99d93eb47e" />
@@ -13,7 +16,7 @@ This repository contains two custom API widgets for Karakeep:
 
      
 
-   2- Recent Bookmarks Widget
+   3 - Recent Bookmarks Widget
     Lists the most recently added bookmarks. 
     
 <img width="306" height="230" alt="immagine" src="https://github.com/user-attachments/assets/c4e5d5a4-0582-499b-bb56-c5f32ebb8f94" />
