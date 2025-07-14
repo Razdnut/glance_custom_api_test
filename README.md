@@ -8,7 +8,8 @@ This repository contains two custom API widgets for Karakeep:
    1 - Statistics Widget
     Returns statistics on the number of bookmarks and the number of tags. 
     
-<img width="309" height="117" alt="immagine" src="https://github.com/user-attachments/assets/026f317c-b548-4ed1-adc2-ddabc0fa3562" />
+<img width="313" height="116" alt="immagine" src="https://github.com/user-attachments/assets/34f274e9-d41b-4ff4-9af2-5b99d93eb47e" />
+
 
      
 
