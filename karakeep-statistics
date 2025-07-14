@@ -1,0 +1,12 @@
+- type: custom-api
+  title: Karakeep Stats
+  url: https://${KARAKEEP_URL}/api/v1/users/me/stats
+  method: GET
+  headers:
+    Authorization: Bearer ${KARAKEEP_API_KEY}
+    Accept: application/json
+  template: |
+    <div style="font-weight: bold; margin-bottom: 10px;">
+      Totale Segnalibri: {{ .JSON.Int "numBookmarks" }}<br>
+      Totale Tag: {{ .JSON.Int "numTags" }}
+    </div>
