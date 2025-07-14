@@ -1,6 +1,6 @@
 - type: custom-api
   title: Karakeep Dashboard
-  cache: 5m
+  cache: 30m
   method: GET
   options:
     limit: 10            # Number of bookmarks to fetch and display
