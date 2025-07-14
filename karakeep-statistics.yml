@@ -1,13 +1,19 @@
 - type: custom-api
   title: Karakeep Stats
+  cache: 10m
   url: https://${KARAKEEP_URL}/api/v1/users/me/stats
   method: GET
-  cache: 5m
   headers:
     Authorization: Bearer ${KARAKEEP_API_KEY}
     Accept: application/json
   template: |
-    <div style="font-weight: bold; margin-bottom: 10px;">
-      Total Bookmarks: {{ .JSON.Int "numBookmarks" }}<br>
-      Total Tag: {{ .JSON.Int "numTags" }}
+    <div class="flex justify-center gap-10 text-center">
+      <div>
+        <div class="color-highlight size-h3">{{ .JSON.Int "numBookmarks" | formatNumber }}</div>
+        <div class="size-h6">BOOKMARKS</div>
+      </div>
+      <div>
+        <div class="color-highlight size-h3">{{ .JSON.Int "numTags" | formatNumber }}</div>
+        <div class="size-h6">TAGS</div>
+      </div>
     </div>
