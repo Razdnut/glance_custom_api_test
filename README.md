@@ -1,5 +1,5 @@
 # glance_custom_api
-Karakeep Custom API Widgets 
+# Karakeep Custom API Widgets 
 
 This repository contains two custom API widgets for Karakeep: 
 
@@ -12,10 +12,11 @@ This repository contains two custom API widgets for Karakeep:
    2- Recent Bookmarks Widget
     Lists the most recently added bookmarks. 
      
+# About Me 
 
-Setup 
+I am not a developer or programmer. Most of the work was done using ChatGPT, with some manual corrections to the API call syntax.
 
-You need to set the following variables: 
+# Variables: 
 
      
 
@@ -26,9 +27,12 @@ You need to set the following variables:
     ${KARAKEEP_API_KEY} = Your API key generated in Karakeep. 
      
 
-Options 
 
-     limit: Number of latest bookmarks to list (10, 20, or 30)  
-     in-new-tab: true or false (whether to open links in a new tab)  
-     collapse-after: Collapse the list after this many items
+## Options
+
+| Option          | Description                                   | Values             |
+|-----------------|-----------------------------------------------|--------------------|
+| `limit`         | Number of latest bookmarks to list            | 10, 20, or 30      |
+| `in-new-tab`    | Open links in a new browser tab                | `true` or `false`  |
+| `collapse-after`| Collapse list after this many items            | Integer (e.g. 5,10)|
      
