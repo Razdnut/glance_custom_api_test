@@ -1,6 +1,7 @@
 - type: custom-api
   title: Karakeep Latest Bookmarks
   method: GET
+  cache: 5m
   options:
     limit: 10
     collapse-after: 6
