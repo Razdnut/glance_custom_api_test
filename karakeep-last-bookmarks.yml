@@ -2,13 +2,15 @@
   title: Karakeep Latest Bookmarks
   method: GET
   options:
-    limit: 30
+    limit: 10
+    collapse-after: 6
     in-new-tab: true
   headers:
     Authorization: Bearer ${KARAKEEP_API_KEY}
     Accept: application/json
   template: |
     {{ $limit := .Options.IntOr "limit" 10 }}
+    {{ $collapseAfter := .Options.IntOr "collapse-after" 6 }}
     {{ $newTab := .Options.BoolOr "in-new-tab" false }}
     {{ $url := printf "https://%s/api/v1/bookmarks?limit=%d" "${KARAKEEP_URL}" $limit }}
 
@@ -19,7 +21,7 @@
 
     {{ $bookmarks := $resp.JSON.Array "bookmarks" }}
 
-    <ul class="list list-gap-10 collapsible-container" data-collapse-after="6" style="max-width: 100%; overflow-x: hidden; font-size: 1em; line-height: 1.3em; padding-left: 0; margin: 0;">
+    <ul class="list list-gap-10 collapsible-container" data-collapse-after="{{ $collapseAfter }}" style="max-width: 100%; overflow-x: hidden; font-size: 1em; line-height: 1.3em; padding-left: 0; margin: 0;">
       {{ range $b := $bookmarks }}
         {{ $content := $b.Get "content" }}
         {{ $title := $content.String "title" }}
