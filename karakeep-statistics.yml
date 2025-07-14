@@ -2,6 +2,7 @@
   title: Karakeep Stats
   url: https://${KARAKEEP_URL}/api/v1/users/me/stats
   method: GET
+  cache: 5m
   headers:
     Authorization: Bearer ${KARAKEEP_API_KEY}
     Accept: application/json
