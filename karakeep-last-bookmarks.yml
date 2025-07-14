@@ -27,6 +27,7 @@
 
         <li style="list-style: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
           <a href="{{ $url }}"
+             title="{{ $title }}"
              {{ if $newTab }} target="_blank" rel="noopener"{{ end }}
              class="color-highlight" style="text-decoration: none; cursor: pointer;">
             {{ $title }}
