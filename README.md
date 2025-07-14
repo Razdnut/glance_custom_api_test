@@ -1,4 +1,4 @@
-# glance_custom_api
+
 # Karakeep Custom API Widgets 
 
 This repository contains two custom API widgets for Karakeep: 
