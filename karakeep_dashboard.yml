@@ -3,30 +3,29 @@
   cache: 5m
   method: GET
   options:
-    limit: 10
-    collapse-after: 6
-    in-new-tab: true
+    limit: 10            # Number of bookmarks to fetch and display
+    collapse-after: 6    # Number of bookmarks after which list collapses
+    in-new-tab: true     # Open bookmark links in a new tab if true
   headers:
     Authorization: Bearer ${KARAKEEP_API_KEY}
     Accept: application/json
-  url: https://${KARAKEEP_URL}/api/v1/users/me/stats
+  url: https://${KARAKEEP_URL}/api/v1/users/me/stats   # API endpoint for user stats
   template: |
-    {{/* Statistiche da primo endpoint */}}
-    <div class="flex justify-center items-center gap-10 text-center" style="margin-bottom:1rem;">
+    {{/* Display user stats fetched from the specified URL */}}
+    <div class="flex justify-center gap-10 text-center" style="margin-bottom:1rem;">
       <div>
         <div class="color-highlight size-h3">{{ .JSON.Int "numBookmarks" | formatNumber }}</div>
         <div class="size-h6">BOOKMARKS</div>
       </div>
-
+      {{/* Vertical separator between stats */}}
       <div style="width:1px; height:40px; background-color: rgba(255,255,255,0.2);"></div>
-
       <div>
         <div class="color-highlight size-h3">{{ .JSON.Int "numTags" | formatNumber }}</div>
         <div class="size-h6">TAGS</div>
       </div>
     </div>
 
-    {{/* Ora richiedi la lista degli ultimi segnalibri con newRequest */}}
+    {{/* Fetch the latest bookmarks using newRequest inside the template */}}
     {{ $limit := .Options.IntOr "limit" 10 }}
     {{ $collapseAfter := .Options.IntOr "collapse-after" 6 }}
     {{ $newTab := .Options.BoolOr "in-new-tab" false }}
@@ -38,17 +37,27 @@
       | getResponse }}
     {{ $bookmarks := $respBookmarks.JSON.Array "bookmarks" }}
 
-    <ul class="list list-gap-10 collapsible-container" data-collapse-after="{{ $collapseAfter }}" style="max-width:100%; overflow-x:hidden; font-size:1em; line-height:1.3em; padding-left:0; margin:0;">
+    {{/* Display bookmarks in a collapsible list */}}
+    <ul class="list list-gap-10 collapsible-container" data-collapse-after="{{ $collapseAfter }}" style="max-width: 100%; overflow-x: hidden; font-size: 1em; line-height: 1.3em; padding-left: 0; margin: 0;">
       {{ range $b := $bookmarks }}
         {{ $content := $b.Get "content" }}
         {{ $title := $content.String "title" }}
         {{ $url := $content.String "url" }}
-        <li style="list-style:none; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+
+        {{/* Limit displayed title length to avoid UI issues, add ellipsis if truncated */}}
+        {{ $maxLength := 60 }}
+        {{ $displayTitle := $title }}
+        {{ if gt (len $title) $maxLength }}
+          {{ $displayTitle = print (slice $title 0 $maxLength) "…" }}
+        {{ end }}
+
+        <li style="list-style: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
           <a href="{{ $url }}"
-             title="{{ $title }}"
+             title="{{ $title }}"  {{/* Full title on hover */}}
              {{ if $newTab }} target="_blank" rel="noopener"{{ end }}
-             class="color-highlight" style="text-decoration:none; cursor:pointer;">
-            {{ $title }}
+             class="color-highlight"  {{/* Highlighted link color */}}
+             style="text-decoration: none; cursor: pointer;">
+            {{ $displayTitle }}
           </a>
         </li>
       {{ end }}
