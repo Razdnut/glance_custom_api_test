@@ -46,5 +46,7 @@ I am not a developer or programmer. Most of the work was done using ChatGPT, wit
 | `collapse-after`| Collapse list after this many items            | Integer (e.g. 5,10)|
 
 
+# NetalertX Custom API Widgets 
+<img width="839" height="423" alt="Screenshot 2025-07-15 202916" src="https://github.com/user-attachments/assets/ea4ecba7-f24a-4c6e-b488-c7ae85ee4122" />
 
      
