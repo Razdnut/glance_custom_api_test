@@ -21,9 +21,7 @@ This repository contains two custom API widgets for Karakeep:
     
 <img width="306" height="230" alt="immagine" src="https://github.com/user-attachments/assets/c4e5d5a4-0582-499b-bb56-c5f32ebb8f94" />
  
-# About Me 
 
-I am not a developer or programmer. Most of the work was done using ChatGPT, with some manual corrections to the API call syntax.
 
 # Variables: 
 
