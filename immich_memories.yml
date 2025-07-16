@@ -1,0 +1,67 @@
+- type: custom-api
+          title: Immich Memories “On This Day”
+          cache: 1m
+          options:
+            base-url: ${IMMICH_URL}        # es. immich.example.com senza https://
+          url: https://${IMMICH_URL}/api/memories?type=on_this_day
+          method: GET
+          headers:
+            x-api-key: ${IMMICH_API_KEY}
+            Accept: application/json
+          template: |
+            {{ $base := .Options.StringOr "base-url" "" }}
+            {{ $found := false }}
+
+            {{/* Calcolo MM-DD di oggi */}}
+            {{ $today := now | formatTime "2006-01-02" }}
+            {{ $todayMD := slice $today 5 10 }}
+
+            <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center;">
+              {{/* Itero ciascuna memory nell’array root */}}
+              {{ range $memory := .JSON.Array "" }}
+                {{ $showAt := $memory.String "showAt" }}
+                {{ $showAtMD := slice $showAt 5 10 }}
+
+                {{/* Filtro solo memoria del giorno */}}
+                {{ if eq $showAtMD $todayMD }}
+                  {{ range $asset := $memory.Array "assets" }}
+                    {{ $id := $asset.String "id" }}
+                    {{ $fileName := $asset.String "originalFileName" }}
+                    {{ $len := len $fileName }}
+
+                    {{/* Estensione jpg/jpeg only */}}
+                    {{ if ge $len 4 }}
+                      {{ $ext4 := slice $fileName (sub $len 4) $len }}
+                      {{ $ext5 := "" }}
+                      {{ if ge $len 5 }} {{ $ext5 = slice $fileName (sub $len 5) $len }} {{ end }}
+
+                      {{ if and (ne $id "") 
+                                (or (eq $ext4 ".jpg") (eq $ext4 ".JPG") (eq $ext5 ".jpeg") (eq $ext5 ".JPEG")) }}
+                        {{ $found = true }}
+
+                        {{/* Richiedo signed-url per preview */}}
+                        {{ $signed := newRequest (printf "https://%s/api/asset/%s/signed-url?type=thumbnail" $base $id) 
+                             | withHeader "x-api-key" (printf "%s" "${IMMICH_API_KEY}")
+                             | getResponse }}
+
+                        {{ $imgUrl := $signed.JSON.String "signedUrl" }}
+
+                        <div style="width:150px; text-align:center; margin:5px;">
+                          <img 
+                            src="{{ $imgUrl | safeURL }}" 
+                            alt="{{ $fileName }}" 
+                            style="width:100%; border-radius:8px;" />
+                          <div style="font-size:0.75em; color:var(--color-subtle); margin-top:4px;">
+                            {{ $showAt }}
+                          </div>
+                        </div>
+                      {{ end }}
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+
+              {{ if not $found }}
+                <div>No JPG/JPEG memories found for today.</div>
+              {{ end }}
+            </div>
