@@ -46,5 +46,6 @@ Lists the most recently added bookmarks.
 
 # NetalertX Custom API Widgets 
 
+<img width="309" height="389" alt="Immagine 2025-07-16 225000" src="https://github.com/user-attachments/assets/bcb55ee7-f438-4311-88af-a5ca86599ae4" />
 
      
