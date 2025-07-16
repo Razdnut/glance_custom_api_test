@@ -1,5 +1,5 @@
 
-# Karakeep Custom API Widgets 
+# Custom API Widgets 
 
 This repository contains two custom API widgets for Karakeep: 
 
