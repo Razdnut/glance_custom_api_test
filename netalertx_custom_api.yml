@@ -55,37 +55,4 @@
                   </ul>
                 </div>
               </details>
-
-              <details style="flex: 1;" open>
-                <summary style="cursor: pointer; font-weight: 600;">Total ({{ $totalDevices }})</summary>
-                <div style="max-height: 300px; overflow-y: auto; padding-right: 6px;">
-                  <ul style="padding-left: 0; margin: 0; list-style: none;">
-                    {{ range $dev := $data }}
-                      {{ $iconData := $dev.String "devIcon" }}
-                      {{ $name := $dev.String "devName" }}
-                      {{ $displayName := $name }}
-                      {{ if gt (len $name) 26 }}
-                        {{ $displayName = printf "%s…" (slice $name 0 26) }}
-                      {{ end }}
-
-                      <li style="margin-bottom: 1em;">
-                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                          {{ if ne $iconData "" }}
-                            <img src="data:image/svg+xml;base64,{{ $iconData }}" alt="icon" style="width: 20px; height: 20px;" />
-                          {{ end }}
-                          <span title="{{ $name }}" style="font-weight: 600; font-size: 0.9em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">
-                            {{ $displayName }}
-                          </span>
-                          <span style="padding: 2px 6px; font-size: 0.75em; color: var(--color-positive); border: 1px solid var(--color-positive); border-radius: 4px; white-space: normal; max-width: 100px; word-break: break-word;">
-                            {{ $dev.String "devStatus" }}
-                          </span>
-                        </div>
-                        <div title="{{ $dev.String "devLastIP" }}" style="font-size: 0.75em; color: var(--color-subtle); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;">
-                          {{ $dev.String "devLastIP" }}
-                        </div>
-                      </li>
-                    {{ end }}
-                  </ul>
-                </div>
-              </details>
             </div>
