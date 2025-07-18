@@ -48,4 +48,9 @@ Lists the most recently added bookmarks.
 
 <img width="309" height="389" alt="Immagine 2025-07-16 225000" src="https://github.com/user-attachments/assets/bcb55ee7-f438-4311-88af-a5ca86599ae4" />
 
+
+
+# PeaNUT UPS Status
+<img width="289" height="277" alt="preview" src="https://github.com/user-attachments/assets/e700a7c8-2aad-4c0a-8443-f4bac30b96cf" />
+
      
