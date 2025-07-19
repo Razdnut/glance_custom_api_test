@@ -1,5 +1,5 @@
 Does not work due to CORS limits.
-- type: custom-api
+        - type: custom-api
           title: Immich Memories “On This Day”
           cache: 1m
           options:
