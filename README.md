@@ -1,6 +1,5 @@
 # Glance_custom_api BY RAZDNUT
 
-Generated on: 2025-07-23 21:24:30
 
 ## Table of Contents
 
